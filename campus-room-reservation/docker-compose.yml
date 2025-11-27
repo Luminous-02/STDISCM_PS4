@@ -1,33 +1,85 @@
 version: "3.9"
 
 services:
-  # Node B – Auth Service (placeholder using nginx)
+  # Node B – Auth Service
   auth-service:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: ./auth-service/Dockerfile
     container_name: auth-service
+    environment:
+      - PORT=8080
+      - JWT_ACCESS_SECRET=change-me-access
+      - JWT_REFRESH_SECRET=change-me-refresh
+      - DB_HOST=db-primary
+      - DB_PORT=5432
+      - DB_NAME=campusdb
+      - DB_USER=app
+      - DB_PASSWORD=examplepassword
     ports:
-      - "8081:80"
+      - "8081:8080"
+    depends_on:
+      - db-primary
 
-  # Node C – Room Catalog Service (placeholder)
+  # Node C – Room Catalog Service
   room-service:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: ./room-service/Dockerfile
     container_name: room-service
+    environment:
+      - PORT=8080
+      - JWT_ACCESS_SECRET=change-me-access
+      - JWT_REFRESH_SECRET=change-me-refresh
+      - DB_HOST=db-primary
+      - DB_PORT=5432
+      - DB_NAME=campusdb
+      - DB_USER=app
+      - DB_PASSWORD=examplepassword
     ports:
-      - "8082:80"
+      - "8082:8080"
+    depends_on:
+      - db-primary
 
-  # Node D – Reservation Service (placeholder)
+  # Node D – Reservation Service
   reservation-service:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: ./reservation-service/Dockerfile
     container_name: reservation-service
+    environment:
+      - PORT=8080
+      - JWT_ACCESS_SECRET=change-me-access
+      - JWT_REFRESH_SECRET=change-me-refresh
+      - DB_HOST=db-primary
+      - DB_PORT=5432
+      - DB_NAME=campusdb
+      - DB_USER=app
+      - DB_PASSWORD=examplepassword
     ports:
-      - "8083:80"
+      - "8083:8080"
+    depends_on:
+      - db-primary
 
-  # Node E – Reports Service (placeholder)
+  # Node E – Reports Service
   reports-service:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: ./reports-service/Dockerfile
     container_name: reports-service
+    environment:
+      - PORT=8080
+      - JWT_ACCESS_SECRET=change-me-access
+      - JWT_REFRESH_SECRET=change-me-refresh
+      - DB_HOST=db-primary
+      - DB_PORT=5432
+      - DB_NAME=campusdb
+      - DB_USER=app
+      - DB_PASSWORD=examplepassword
     ports:
-      - "8084:80"
+      - "8084:8080"
+    depends_on:
+      - db-primary
 
   # Node A – React View Node (placeholder nginx)
   view-node:
