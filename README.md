@@ -17,7 +17,7 @@ go run ./cmd/consumer -c 2 -q 32 -data_dir ./data
 2) Prepare producer folders with sample videos:
 ```bash
 mkdir -p ./input/folder_1 ./input/folder_2
-# place .mp4/.mov/.mkv files into each folder
+# place the video files here!!
 ```
 3) Run producers (one goroutine per folder):
 ```bash
