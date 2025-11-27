@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  # Node B – Auth Service (placeholder using nginx)
+  auth-service:
+    image: nginx:alpine
+    container_name: auth-service
+    ports:
+      - "8081:80"
+
+  # Node C – Room Catalog Service (placeholder)
+  room-service:
+    image: nginx:alpine
+    container_name: room-service
+    ports:
+      - "8082:80"
+
+  # Node D – Reservation Service (placeholder)
+  reservation-service:
+    image: nginx:alpine
+    container_name: reservation-service
+    ports:
+      - "8083:80"
+
+  # Node E – Reports Service (placeholder)
+  reports-service:
+    image: nginx:alpine
+    container_name: reports-service
+    ports:
+      - "8084:80"
+
+  # Node A – React View Node (placeholder nginx)
+  view-node:
+    image: nginx:alpine
+    container_name: view-node
+    ports:
+      - "3000:80"
+
+  # Node F – Primary Database (PostgreSQL)
+  db-primary:
+    image: postgres:15
+    container_name: db-primary
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: examplepassword
+      POSTGRES_DB: campusdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-primary-data:/var/lib/postgresql/data
+
+volumes:
+  db-primary-data:
