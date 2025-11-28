@@ -33,6 +33,9 @@ public class Room {
     @Column(name = "total_seats")
     private Integer totalSeats;
     
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Seat> seats = new ArrayList<>();
+    
     // Constructors
     public Room() {}
     
@@ -42,6 +45,12 @@ public class Room {
         this.roomNumber = roomNumber;
         this.type = type;
         this.totalSeats = totalSeats;
+    }
+    
+    // Helper method to add seat
+    public void addSeat(Seat seat) {
+        seats.add(seat);
+        seat.setRoom(this);
     }
     
     // Getters and setters
@@ -65,6 +74,9 @@ public class Room {
     
     public Integer getTotalSeats() { return totalSeats; }
     public void setTotalSeats(Integer totalSeats) { this.totalSeats = totalSeats; }
+    
+    public List<Seat> getSeats() { return seats; }
+    public void setSeats(List<Seat> seats) { this.seats = seats; }
 }
 
 enum RoomType {
