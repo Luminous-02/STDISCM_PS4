@@ -34,6 +34,22 @@ services:
     networks:
       - campus_net
 
+  frontend-react:
+    build: ./frontend-react
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+    depends_on:
+      - catalog-service
+    volumes:
+      - ./frontend-react/src:/app/src
+      - ./frontend-react/public:/app/public
+    stdin_open: true
+    tty: true
+    networks:
+      - campus_net
+
 networks:
   campus_net:
     driver: bridge
